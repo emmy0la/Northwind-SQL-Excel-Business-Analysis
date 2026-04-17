@@ -19,11 +19,11 @@ Businesses collect large volumes of transactional data, but most struggle to tur
 
 Key questions often remain unanswered:
 
-Where are our customers located
-Who are our most valuable customers
-How much revenue are we generating
-Which markets are strongest
-Where are operational delays happening
+- Where are our customers located
+- Who are our most valuable customers
+- How much revenue are we generating
+- Which markets are strongest
+- Where are operational delays happening
 
 This project answers these questions using SQL queries and Excel-based reporting.
 
@@ -44,21 +44,21 @@ Source: Northwind Database (SQLite)
 Tables used:
 
 Customers
-Customer details including country and region
+- Customer details including country and region
 
 Orders
-Transaction-level order data
+- Transaction-level order data
 
 Order Details
-Product-level breakdown of each order
+- Product-level breakdown of each order
 
 Products
-Product catalog and category linkage
+- Product catalog and category linkage
 
-Suppliers
+- Suppliers
 Supplier information
 
-Categories
+- Categories
 Product grouping structure
 
 ## Tools Used
