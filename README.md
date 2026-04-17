@@ -83,8 +83,12 @@ Interpreted insights for business use
 ### 1. Customer Diversity Analysis
 
 ```sql
-SELECT DISTINCT Country AS customer_country
-FROM Customers;
+SELECT 
+    Country AS customer_country, 
+    COUNT(CustomerID) AS number_of_customers
+FROM Customers
+GROUP BY Country
+ORDER BY number_of_customers DESC;
 ```
 
 Insight
@@ -94,9 +98,15 @@ Customers are spread across multiple countries, confirming a global customer bas
 ### 2. Missing Data Audit
 
 ```sql
-SELECT CustomerID, CompanyName, Country
+SELECT 
+    CustomerID, 
+    CompanyName, 
+    ContactName, 
+    ContactTitle, 
+    Country
 FROM Customers
-WHERE Region IS NULL;
+WHERE Region IS NULL
+ORDER BY Country, CompanyName;
 ```
 
 Insight
@@ -106,7 +116,11 @@ A portion of customer records have missing region data, which can affect logisti
 ### 3. Order Volume Overview
 
 ```sql
-SELECT COUNT(OrderID) AS total_orders
+SELECT 
+    COUNT(*) AS total_orders,
+    COUNT(DISTINCT CustomerID) AS unique_customers,
+    MIN(OrderDate) AS first_order_date,
+    MAX(OrderDate) AS last_order_date
 FROM Orders;
 ```
 
@@ -117,8 +131,11 @@ The total number of orders reflects steady transaction activity and overall busi
 ### 4. Revenue Calculation
 
 ```sql
-SELECT SUM(UnitPrice * Quantity * (1 - Discount)) AS total_revenue
-FROM "Order Details";
+SELECT 
+    SUM(UnitPrice * Quantity * (1 - Discount)) AS total_revenue,
+    COUNT(*) AS total_line_items,
+    AVG(UnitPrice * Quantity * (1 - Discount)) AS avg_line_value
+FROM [Order Details];
 ```
 
 Insight
@@ -128,9 +145,15 @@ The business generates strong revenue, showing consistent commercial performance
 ### 5. Product Performance by Category
 
 ```sql
-SELECT CategoryID, COUNT(ProductID) AS product_count
-FROM Products
-GROUP BY CategoryID;
+SELECT 
+    c.CategoryID,
+    c.CategoryName,
+    COUNT(p.ProductID) AS product_count,
+    AVG(p.UnitPrice) AS avg_unit_price
+FROM Products p
+JOIN Categories c ON p.CategoryID = c.CategoryID
+GROUP BY c.CategoryID, c.CategoryName
+ORDER BY product_count DESC;
 ```
 
 Insight
@@ -140,10 +163,17 @@ Product distribution varies across categories, highlighting areas with higher pr
 ### 6. High-Value Customers
 
 ```sql
-SELECT CustomerID, COUNT(OrderID) AS order_count
-FROM Orders
-GROUP BY CustomerID
-HAVING COUNT(OrderID) > 10;
+SELECT 
+    o.CustomerID,
+    c.CompanyName,
+    COUNT(DISTINCT o.OrderID) AS order_count,
+    SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS total_revenue
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+JOIN [Order Details] od ON o.OrderID = od.OrderID
+GROUP BY o.CustomerID, c.CompanyName
+HAVING COUNT(DISTINCT o.OrderID) > 10
+ORDER BY total_revenue DESC;
 ```
 
 Insight
@@ -153,9 +183,18 @@ A smaller group of customers contributes a large portion of total orders, indica
 ### 7. Average Freight per Customer
 
 ```sql
-SELECT CustomerID, AVG(Freight) AS avg_freight
+SELECT 
+    CustomerID,
+    COUNT(OrderID) AS total_orders,
+    AVG(Freight) AS avg_freight,
+    CASE 
+        WHEN AVG(Freight) > 100 THEN 'High Freight'
+        WHEN AVG(Freight) > 50 THEN 'Medium Freight'
+        ELSE 'Low Freight'
+    END AS freight_segment
 FROM Orders
-GROUP BY CustomerID;
+GROUP BY CustomerID
+ORDER BY avg_freight DESC;
 ```
 
 Insight
@@ -165,10 +204,13 @@ Freight costs vary significantly across customers, suggesting differences in shi
 ### 8. Supplier Contribution Analysis
 
 ```sql
-SELECT SupplierID, COUNT(ProductID) AS product_supply_count
-FROM Products
-GROUP BY SupplierID
-HAVING COUNT(ProductID) > 5;
+SELECT Suppliers.SupplierID, 
+       Suppliers.ContactName, 
+       COUNT(Products.ProductID) AS product_supply_count
+FROM Suppliers
+INNER JOIN Products ON Suppliers.SupplierID = Products.SupplierID
+GROUP BY Suppliers.SupplierID, Suppliers.ContactName
+HAVING COUNT(Products.ProductID) >= 5;
 ```
 
 Insight
@@ -178,10 +220,17 @@ Certain suppliers contribute more products, making them critical to supply chain
 ### 9. Strong Market Identification
 
 ```sql
-SELECT Country, COUNT(CustomerID) AS customer_count
-FROM Customers
-GROUP BY Country
-HAVING COUNT(CustomerID) > 5;
+SELECT 
+    c.Country,
+    COUNT(DISTINCT c.CustomerID) AS customer_count,
+    COUNT(DISTINCT o.OrderID) AS total_orders,
+    SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS total_revenue
+FROM Customers c
+LEFT JOIN Orders o ON c.CustomerID = o.CustomerID
+LEFT JOIN [Order Details] od ON o.OrderID = od.OrderID
+GROUP BY c.Country
+HAVING COUNT(DISTINCT c.CustomerID) > 5
+ORDER BY total_revenue DESC;
 ```
 
 Insight
@@ -191,9 +240,13 @@ Some countries have higher customer concentration, making them priority markets 
 ### 10. Pending Shipments
 
 ```sql
-SELECT COUNT(OrderID) AS pending_shipments
-FROM Orders
-WHERE ShippedDate IS NULL;
+SELECT Shippers.ShipperID, 
+       Shippers.CompanyName, 
+       COUNT(Orders.OrderID) AS pending_shipments
+FROM Shippers
+INNER JOIN Orders ON Shippers.ShipperID = Orders.ShipVia
+WHERE Orders.ShippedDate IS NULL
+GROUP BY Shippers.ShipperID, Shippers.CompanyName;
 ```
 
 Insight
