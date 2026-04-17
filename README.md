@@ -55,28 +55,28 @@ Order Details
 Products
 - Product catalog and category linkage
 
-- Suppliers
-Supplier information
+Suppliers
+- Supplier information
 
-- Categories
-Product grouping structure
+Categories
+- Product grouping structure
 
 ## Tools Used
 
-SQL (SQLite) for querying
-SQLite Online for execution
-Microsoft Excel for analysis and visualization
-GitHub for project documentation
+- SQL (SQLite) for querying
+- SQLite Online for execution
+- Microsoft Excel for analysis and visualization
+- GitHub for project documentation
 
 ## Project Workflow
 
-Loaded dataset into SQLite environment
-Explored table structure and relationships
-Wrote SQL queries to answer business questions
-Validated outputs for accuracy
-Exported results into Excel
-Built visualizations for each analysis
-Interpreted insights for business use
+- Loaded dataset into SQLite environment
+- Explored table structure and relationships
+- Wrote SQL queries to answer business questions
+- Validated outputs for accuracy
+- Exported results into Excel
+- Built visualizations for each analysis
+- Interpreted insights for business use
 
 ## Business Questions and Analysis
 
