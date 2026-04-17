@@ -257,14 +257,14 @@ Pending shipments highlight operational delays that require attention to improve
 
 Each SQL output was exported to Excel and structured into:
 
-Raw_Data sheet containing query results
-Charts sheet containing visualizations
+- Raw_Data sheet containing query results
+- Charts sheet containing visualizations
 
 Charts used:
 
-Bar charts for comparisons
-Column charts for totals
-KPI style visuals for single metrics
+- Bar charts for comparisons
+- Column charts for totals
+- KPI style visuals for single metrics
 
 Each chart includes clear titles and short insights to support decision making.
 
