@@ -29,13 +29,13 @@ This project answers these questions using SQL queries and Excel-based reporting
 
 ## Project Objectives
 
-Understand customer distribution across countries
-Evaluate total business activity and revenue performance
-Identify high-value and repeat customers
-Detect missing or incomplete data
-Analyze supplier and product distribution
-Track operational inefficiencies such as pending shipments
-Present findings clearly using Excel visualizations
+1. Understand customer distribution across countries
+2. Evaluate total business activity and revenue performance
+3. Identify high-value and repeat customers
+4. Detect missing or incomplete data
+5. Analyze supplier and product distribution
+6. Track operational inefficiencies such as pending shipments
+7. Present findings clearly using Excel visualizations
 
 ## Dataset Description
 
