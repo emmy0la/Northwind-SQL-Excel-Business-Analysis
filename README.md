@@ -91,6 +91,8 @@ GROUP BY Country
 ORDER BY number_of_customers DESC;
 ```
 
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/d91e10d5617d20c189d483a4d8a307de39b87eb8/images%20charts%20and%20screenshots/1.%20Customer%20Diversity%20Analysis.png)
+
 Insight
 
 Customers are spread across multiple countries, confirming a global customer base and supporting international expansion opportunities.
