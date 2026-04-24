@@ -1,0 +1,188 @@
+From Queries to Business Decisions
+
+This project goes beyond writing SQL queries. It focuses on how data answers real business questions. Each query represents a decision point for marketing, sales, or operations.
+
+I approached this like a data analyst. Not just pulling numbers, but asking what the numbers mean.
+
+Customer Diversity Analysis
+I started by checking how global the business is.
+
+SQL used:
+SELECT DISTINCT Country AS customer_country FROM Customers;
+
+What I saw:
+Customers are spread across many countries.
+
+What it means:
+The business is not local. It operates globally.
+
+Decision angle:
+Marketing should not treat all customers the same. Campaigns should be region-specific. Expansion strategy should focus on already strong regions.
+
+Missing Data Audit
+Next, I checked data quality.
+
+SQL used:
+SELECT CustomerID, CompanyName, Country
+FROM Customers
+WHERE Region IS NULL;
+
+What I saw:
+Some customers have no region assigned.
+
+What it means:
+There is incomplete data.
+
+Decision angle:
+This affects logistics and targeting. The business should enforce required fields during data entry. Clean data leads to better decisions.
+
+Order Volume Overview
+I wanted a quick snapshot of activity.
+
+SQL used:
+SELECT COUNT(*) AS total_orders FROM Orders;
+
+What I saw:
+Total number of orders placed.
+
+What it means:
+This shows how active the business is.
+
+Decision angle:
+Useful for tracking growth over time. Management can compare this monthly or yearly.
+
+Revenue Calculation
+Now I moved to money.
+
+SQL used:
+SELECT SUM(UnitPrice * Quantity * (1 - Discount)) AS total_revenue
+FROM "Order Details";
+
+What I saw:
+Total revenue generated.
+
+What it means:
+This is the actual value the business is making.
+
+Decision angle:
+Helps track performance. Can guide pricing, discount strategy, and sales targets.
+
+Product Performance by Category
+I checked how products are distributed.
+
+SQL used:
+SELECT CategoryID, COUNT(ProductID) AS product_count
+FROM Products
+GROUP BY CategoryID;
+
+What I saw:
+Some categories have more products than others.
+
+What it means:
+Product offering is uneven.
+
+Decision angle:
+The business can expand underrepresented categories or double down on strong ones.
+
+High Value Customers
+I looked for customers driving activity.
+
+SQL used:
+SELECT CustomerID, COUNT() AS order_count
+FROM Orders
+GROUP BY CustomerID
+HAVING COUNT() > 10;
+
+What I saw:
+A small group of customers place many orders.
+
+What it means:
+Revenue is concentrated.
+
+Decision angle:
+These customers should be prioritized. Loyalty programs, direct engagement, and retention strategies should focus here.
+
+Average Freight by Customer
+I explored cost behavior.
+
+SQL used:
+SELECT CustomerID, AVG(Freight) AS avg_freight
+FROM Orders
+GROUP BY CustomerID;
+
+What I saw:
+Freight costs vary across customers.
+
+What it means:
+Shipping cost is inconsistent.
+
+Decision angle:
+The business can optimize logistics. High freight customers may need better routing or pricing adjustments.
+
+Suppliers with Multiple Products
+I checked supplier strength.
+
+SQL used:
+SELECT SupplierID, COUNT(ProductID) AS product_supply_count
+FROM Products
+GROUP BY SupplierID
+HAVING COUNT(ProductID) > 5;
+
+What I saw:
+Few suppliers supply multiple products.
+
+What it means:
+Supplier base is spread out.
+
+Decision angle:
+The company can evaluate if consolidation improves efficiency or if diversification reduces risk.
+
+Countries with High Customer Base
+I identified strong markets.
+
+SQL used:
+SELECT Country, COUNT(CustomerID) AS customer_count
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5;
+
+What I saw:
+Some countries have many customers.
+
+What it means:
+These are core markets.
+
+Decision angle:
+Focus marketing spend here. Expand operations where demand already exists.
+
+Orders Without Shipment
+Finally, I checked operations.
+
+SQL used:
+SELECT COUNT(*) AS pending_shipments
+FROM Orders
+WHERE ShippedDate IS NULL;
+
+What I saw:
+Some orders are not shipped.
+
+What it means:
+There are delays.
+
+Decision angle:
+Operations team needs to investigate. Delays affect customer satisfaction and revenue flow.
+
+Final Reflection
+
+This project shows how SQL moves from syntax to impact.
+
+You:
+Ask the right questions
+Query the data
+Interpret the output
+Turn it into decisions
+
+That is the real job.
+
+SQL gives you answers.
+Analysis gives those answers meaning.
