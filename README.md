@@ -111,6 +111,8 @@ WHERE Region IS NULL
 ORDER BY Country, CompanyName;
 ```
 
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/2.%20Missing%20Data%20Audit.png)
+
 Insight
 
 A portion of customer records have missing region data, which can affect logistics planning and targeted marketing.
@@ -126,6 +128,8 @@ SELECT
 FROM Orders;
 ```
 
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/3.%20Order%20Volume%20Overview.png)
+
 Insight
 
 The total number of orders reflects steady transaction activity and overall business engagement.
@@ -139,6 +143,8 @@ SELECT
     AVG(UnitPrice * Quantity * (1 - Discount)) AS avg_line_value
 FROM [Order Details];
 ```
+
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/4.%20Revenue%20Calculation.png)
 
 Insight
 
@@ -157,6 +163,8 @@ JOIN Categories c ON p.CategoryID = c.CategoryID
 GROUP BY c.CategoryID, c.CategoryName
 ORDER BY product_count DESC;
 ```
+
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/5.%20Product%20Performance%20by%20Category.png)
 
 Insight
 
@@ -177,6 +185,8 @@ GROUP BY o.CustomerID, c.CompanyName
 HAVING COUNT(DISTINCT o.OrderID) > 10
 ORDER BY total_revenue DESC;
 ```
+
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/6.%20High-Value%20Customers.png)
 
 Insight
 
@@ -199,6 +209,8 @@ GROUP BY CustomerID
 ORDER BY avg_freight DESC;
 ```
 
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/7.%20Average%20Freight%20per%20Customer.png)
+
 Insight
 
 Freight costs vary significantly across customers, suggesting differences in shipping distance or order size.
@@ -214,6 +226,8 @@ INNER JOIN Products ON Suppliers.SupplierID = Products.SupplierID
 GROUP BY Suppliers.SupplierID, Suppliers.ContactName
 HAVING COUNT(Products.ProductID) >= 5;
 ```
+
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/8.%20Supplier%20Contribution%20Analysis.png)
 
 Insight
 
@@ -235,6 +249,8 @@ HAVING COUNT(DISTINCT c.CustomerID) > 5
 ORDER BY total_revenue DESC;
 ```
 
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/9.%20Strong%20Market%20Identification.png)
+
 Insight
 
 Some countries have higher customer concentration, making them priority markets for growth.
@@ -250,6 +266,8 @@ INNER JOIN Orders ON Shippers.ShipperID = Orders.ShipVia
 WHERE Orders.ShippedDate IS NULL
 GROUP BY Shippers.ShipperID, Shippers.CompanyName;
 ```
+
+![image alt](https://github.com/emmy0la/Northwind-SQL-Excel-Business-Analysis/blob/2ca98d0f435e86b071f93645e908215da8a0585b/images%20charts%20and%20screenshots/10.%20Pending%20Shipments.png)
 
 Insight
 
